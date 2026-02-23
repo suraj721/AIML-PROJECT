@@ -1,7 +1,5 @@
 📚 Research Topic Analysis System
 
-
-
 A traditional NLP-based research analysis system for academic documents (e.g., arXiv papers).
 This project implements a classical Natural Language Processing and Machine Learning pipeline to analyze research documents without using Large Language Models (LLMs) or agentic AI systems.
 
@@ -11,155 +9,143 @@ Researchers often need a quick analytical overview of a research domain but face
 
 This system automates research document analysis by:
 
-Extracting key terms
-
-Identifying latent topics
-
-Clustering similar documents
-
-Generating extractive summaries
-
-Providing clustering evaluation metrics
+- Extracting key terms  
+- Identifying latent topics  
+- Clustering similar documents  
+- Generating extractive summaries  
+- Providing clustering evaluation metrics  
 
 All using interpretable statistical NLP techniques.
 
 🧠 Key Features
 
-📄 Upload multiple .txt or .pdf research papers
-
-🔎 TF-IDF based key term extraction
-
-🧩 Topic modeling using Non-negative Matrix Factorization (NMF)
-
-📊 Document clustering using KMeans
-
-✂ Extractive summarization using sentence-level TF-IDF scoring
-
-📈 Silhouette score for clustering evaluation
-
-🌐 Interactive Streamlit web interface
+- 📄 Upload multiple `.txt` or `.pdf` research papers  
+- 🔎 TF-IDF based key term extraction  
+- 🧩 Topic modeling using Non-negative Matrix Factorization (NMF)  
+- 📊 Document clustering using KMeans  
+- ✂ Extractive summarization using sentence-level TF-IDF scoring  
+- 📈 Silhouette score for clustering evaluation  
+- 🌐 Interactive Streamlit web interface  
 
 🏗 System Architecture
 
 The system follows a structured NLP pipeline:
 
-Document Input
+**1. Document Input**
+- Research keywords  
+- Uploaded TXT/PDF files  
 
-Research keywords
+**2. Text Preprocessing**
+- Tokenization  
+- Lowercasing  
+- Stop-word removal  
+- Lemmatization  
+- Sentence segmentation  
 
-Uploaded TXT/PDF files
+**3. Feature Extraction**
+- TF-IDF vectorization  
 
-Text Preprocessing
+**4. Analysis**
+- Topic modeling (NMF)  
+- Document clustering (KMeans)  
 
-Tokenization
+**5. Summarization**
+- TF-IDF-based sentence ranking  
 
-Lowercasing
-
-Stop-word removal
-
-Lemmatization
-
-Sentence segmentation
-
-Feature Extraction
-
-TF-IDF vectorization
-
-Analysis
-
-Topic modeling (NMF)
-
-Document clustering (KMeans)
-
-Summarization
-
-TF-IDF-based sentence ranking
-
-Output
-
-Key terms
-
-Topic clusters
-
-Extractive summaries
-
-Evaluation metrics
+**6. Output**
+- Key terms  
+- Topic clusters  
+- Extractive summaries  
+- Evaluation metrics  
 
 📂 Project Structure
 
+```text
 research_topic_analysis/
 │
 ├── app.py                # Streamlit user interface
 ├── nlp_pipeline.py       # Core NLP & ML processing logic
 ├── requirements.txt      # Python dependencies
 └── README.md             # Project documentation
+```
 
 ⚙️ Installation & Setup
-1️⃣ Clone the Repository
+
+**1️⃣ Clone the Repository**
+
+```bash
 git clone <your-repo-link>
 cd research_topic_analysis
-2️⃣ Create Virtual Environment
+```
+
+**2️⃣ Create Virtual Environment**
+
+```bash
 python -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate
-3️⃣ Install Dependencies
+```
+
+**3️⃣ Install Dependencies**
+
+```bash
 pip install -r requirements.txt
-4️⃣ Download NLP Models
+```
+
+**4️⃣ Download NLP Models**
+
+```bash
 python -m spacy download en_core_web_sm
 python -m nltk.downloader punkt stopwords wordnet
-▶️ Run the Application
-streamlit run app.py
+```
 
-Open the local URL (typically http://localhost:8501) in your browser.
+▶️ Run the Application
+
+```bash
+streamlit run app.py
+```
+
+Open the local URL (typically `http://localhost:8501`) in your browser.
 
 📊 Core Algorithms Used
-Component	Technique
-Feature Extraction	TF-IDF
-Topic Modeling	NMF
-Clustering	KMeans
-Summarization	Sentence-level TF-IDF scoring
-Evaluation	Silhouette Score
+
+| Component          | Technique                      |
+|--------------------|--------------------------------|
+| Feature Extraction | TF-IDF                         |
+| Topic Modeling     | NMF                            |
+| Clustering         | KMeans                         |
+| Summarization      | Sentence-level TF-IDF scoring  |
+| Evaluation         | Silhouette Score              |
+
 ⚠️ Limitations
 
 While effective and interpretable, traditional NLP approaches have limitations:
 
-No semantic understanding of context
-
-Ignores word order
-
-Sensitive to preprocessing decisions
-
-Requires manual topic selection
-
-Limited generalization across domains
-
-No autonomous reasoning or external knowledge retrieval
+- No semantic understanding of context  
+- Ignores word order  
+- Sensitive to preprocessing decisions  
+- Requires manual topic selection  
+- Limited generalization across domains  
+- No autonomous reasoning or external knowledge retrieval  
 
 These limitations highlight opportunities for future integration of embedding-based models and intelligent workflows.
 
 🔮 Future Enhancements
 
-Replace sparse TF-IDF with dense semantic embeddings
-
-Add visualization dashboards for topic distributions
-
-Improve summarization using hybrid statistical methods
-
-Integrate intelligent retrieval mechanisms
-
-Deploy publicly on cloud platforms
+- Replace sparse TF-IDF with dense semantic embeddings  
+- Add visualization dashboards for topic distributions  
+- Improve summarization using hybrid statistical methods  
+- Integrate intelligent retrieval mechanisms  
+- Deploy publicly on cloud platforms  
 
 🛠 Technologies Used
 
-Python
-
-Streamlit
-
-scikit-learn
-
-spaCy
-
-NLTK
+- Python  
+- Streamlit  
+- scikit-learn  
+- spaCy  
+- NLTK  
 
 📌 License
 
 This project is intended for academic and educational purposes.
+
