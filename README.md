@@ -42,24 +42,6 @@ This system automates a **traditional NLP pipeline** to support literature revie
 
 ## 3. System Architecture (Traditional NLP Pipeline)
 
-Conceptual pipeline:
-
-```mermaid
-flowchart TD
-    A[User Topic Keywords] --> B[Collect & Upload Documents]
-    B --> C[Document Loader<br/>(TXT/PDF to Raw Text)]
-    C --> D[Preprocessing<br/>(tokenize, lower, stopwords, lemmatize)]
-    D --> E[Feature Extraction<br/>(TF-IDF vectors)]
-    E --> F[Topic Modeling<br/>(NMF)]
-    E --> G[Clustering<br/>(KMeans)]
-    D --> H[Sentence Scoring<br/>(TF-IDF-based)]
-    F --> I[Key Themes & Topics]
-    G --> J[Topic Clusters]
-    H --> K[Extractive Summaries]
-    I --> L[Streamlit UI]
-    J --> L
-    K --> L
-```
 
 **Implementation components**:
 
