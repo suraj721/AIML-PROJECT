@@ -1,0 +1,12 @@
+streamlit
+numpy
+pandas
+scikit-learn
+nltk
+spacy
+matplotlib
+networkx
+pypdf
+fastapi
+uvicorn
+python-multipart
