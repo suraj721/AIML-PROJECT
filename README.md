@@ -1,154 +1,165 @@
-# Research Topic Analysis System – Milestone 1
-
-Traditional NLP-based research analysis for academic documents (e.g., arXiv papers). This is **Milestone 1** of the “Intelligent Research Topic Analysis and Agentic AI Research Assistant” project, using only classical NLP and ML (no LLMs or agents).
-
----
-
-## 1. Problem & Use-Case
-
-Researchers often want a **quick analytical view** of a research area:
-
-- **Input**: 
-  - Research topic keywords (e.g., *graph neural networks*, *federated learning*).
-  - Uploaded research documents (PDF or plain text articles).
-- **Output**:
-  - Key terms and themes.
-  - Topic clusters or categories.
-  - Extractive summaries of the uploaded content.
-  - Optional analytical visualizations (topic-term distributions).
-
-This system automates a **traditional NLP pipeline** to support literature review and topic exploration *without* LLMs.
-
----
-
-## 2. Inputs & Outputs
-
-- **Inputs**
-  - Text query: research topic keywords.
-  - One or more uploaded files:
-    - `.txt` files (UTF-8 text).
-    - `.pdf` research papers (basic text extraction).
-
-- **Outputs**
-  - **Preprocessed text** (tokenized, stop-word removed, lemmatized).
-  - **Key terms** via TF-IDF statistics.
-  - **Topic modeling** (NMF on TF-IDF) with top words per topic.
-  - **Document clusters** (KMeans on TF-IDF) with top terms per cluster.
-  - **Extractive summaries**: top-scoring sentences chosen from the documents.
-  - **Basic evaluation**:
-    - Silhouette score for clustering (interpretability proxy).
-
----
-
-## 3. System Architecture (Traditional NLP Pipeline)
+📚 Research Topic Analysis System
 
 
-**Implementation components**:
 
-- `nlp_pipeline.py`
-  - `load_documents(...)`: handle TXT/PDF uploads.
-  - `preprocess_text(...)`: tokenization, stopword removal, lemmatization.
-  - `build_tfidf_model(...)`: TF-IDF feature extraction.
-  - `fit_topic_model(...)`: NMF topic modeling.
-  - `cluster_documents(...)`: KMeans clustering and top terms per cluster.
-  - `extractive_summary(...)`: sentence scoring and summary sentence selection.
-- `app.py`
-  - Streamlit UI to connect all pipeline components.
+A traditional NLP-based research analysis system for academic documents (e.g., arXiv papers).
+This project implements a classical Natural Language Processing and Machine Learning pipeline to analyze research documents without using Large Language Models (LLMs) or agentic AI systems.
 
----
+🚀 Project Overview
 
-## 4. How to Run Locally
+Researchers often need a quick analytical overview of a research domain but face difficulty when reviewing multiple academic papers.
 
-### 4.1. Install Dependencies
+This system automates research document analysis by:
 
-From the project directory:
+Extracting key terms
 
-```bash
-cd research_topic_analysis_m1
+Identifying latent topics
+
+Clustering similar documents
+
+Generating extractive summaries
+
+Providing clustering evaluation metrics
+
+All using interpretable statistical NLP techniques.
+
+🧠 Key Features
+
+📄 Upload multiple .txt or .pdf research papers
+
+🔎 TF-IDF based key term extraction
+
+🧩 Topic modeling using Non-negative Matrix Factorization (NMF)
+
+📊 Document clustering using KMeans
+
+✂ Extractive summarization using sentence-level TF-IDF scoring
+
+📈 Silhouette score for clustering evaluation
+
+🌐 Interactive Streamlit web interface
+
+🏗 System Architecture
+
+The system follows a structured NLP pipeline:
+
+Document Input
+
+Research keywords
+
+Uploaded TXT/PDF files
+
+Text Preprocessing
+
+Tokenization
+
+Lowercasing
+
+Stop-word removal
+
+Lemmatization
+
+Sentence segmentation
+
+Feature Extraction
+
+TF-IDF vectorization
+
+Analysis
+
+Topic modeling (NMF)
+
+Document clustering (KMeans)
+
+Summarization
+
+TF-IDF-based sentence ranking
+
+Output
+
+Key terms
+
+Topic clusters
+
+Extractive summaries
+
+Evaluation metrics
+
+📂 Project Structure
+
+research_topic_analysis/
+│
+├── app.py                # Streamlit user interface
+├── nlp_pipeline.py       # Core NLP & ML processing logic
+├── requirements.txt      # Python dependencies
+└── README.md             # Project documentation
+
+⚙️ Installation & Setup
+1️⃣ Clone the Repository
+git clone <your-repo-link>
+cd research_topic_analysis
+2️⃣ Create Virtual Environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+3️⃣ Install Dependencies
 pip install -r requirements.txt
-```
-
-Download SpaCy’s small English model (used for robust lemmatization and sentence splitting). If this fails, the code will fall back to a simpler NLTK-based pipeline:
-
-```bash
+4️⃣ Download NLP Models
 python -m spacy download en_core_web_sm
 python -m nltk.downloader punkt stopwords wordnet
-```
-
-### 4.2. Run the Streamlit App
-
-```bash
+▶️ Run the Application
 streamlit run app.py
-```
 
-Then open the URL shown in the terminal (usually `http://localhost:8501`) in your browser.
+Open the local URL (typically http://localhost:8501) in your browser.
 
----
+📊 Core Algorithms Used
+Component	Technique
+Feature Extraction	TF-IDF
+Topic Modeling	NMF
+Clustering	KMeans
+Summarization	Sentence-level TF-IDF scoring
+Evaluation	Silhouette Score
+⚠️ Limitations
 
-## 5. File Overview
+While effective and interpretable, traditional NLP approaches have limitations:
 
-- `app.py`
-  - Streamlit UI for:
-    - Entering topic keywords.
-    - Uploading multiple documents.
-    - Triggering analysis.
-    - Viewing key terms, topics, clusters, and summaries.
-- `nlp_pipeline.py`
-  - Core NLP & ML functions (preprocessing, TF-IDF, topic modeling, clustering, summarization).
-- `requirements.txt`
-  - Python package dependencies for Milestone 1.
-- `README.md`
-  - Documentation for Milestone 1.
+No semantic understanding of context
 
----
+Ignores word order
 
-## 6. Short Report: Limitations of Traditional Approaches
+Sensitive to preprocessing decisions
 
-**1. Dependence on surface-level statistics**  
-TF-IDF and bag-of-words representations ignore **word order** and deeper semantics. Two sentences with different meanings but similar vocabulary may appear close in vector space. This limits the system’s ability to distinguish nuanced arguments or methodological differences across papers.
+Requires manual topic selection
 
-**2. Vocabulary mismatch and synonymy**  
-Traditional models treat words as independent tokens. Synonyms (e.g., “GNNs” vs. “graph neural networks”), abbreviations, and domain-specific terminology fragment the representation. Without semantic embeddings, topics and clusters may split conceptually similar documents just because they use different surface forms.
+Limited generalization across domains
 
-**3. Sensitivity to preprocessing choices**  
-Results are highly sensitive to stop-word lists, lemmatization quality, and tokenization. Domain-specific stop-words (e.g., “theorem”, “proposition” in theory papers) are not automatically removed. Poor preprocessing can lead to noisy topics and unstable clusters.
+No autonomous reasoning or external knowledge retrieval
 
-**4. Topic modeling interpretability and stability**  
-Classical topic models like NMF or LDA:
-- Require manually choosing the number of topics.
-- Can be unstable with small or heterogeneous document sets.
-- Often produce topics that are hard to interpret without human inspection.  
-Coherence metrics are only approximate and may not align with human judgment for niche research areas.
+These limitations highlight opportunities for future integration of embedding-based models and intelligent workflows.
 
-**5. Limited discourse and document structure awareness**  
-Extractive summarization here is based on TF-IDF sentence scoring. It does not model:
-- Document sections (abstract, introduction, conclusion).
-- Discourse relations (e.g., hypothesis vs. evidence).
-- Citation context.  
-As a result, summaries may overemphasize high-frequency technical terms while missing explanatory or comparative content important for literature review.
+🔮 Future Enhancements
 
-**6. Poor generalization to new styles and domains**  
-Since the system relies on sparse TF-IDF vectors and clustering on top of them, it may struggle when:
-- The number of documents is very small.
-- The writing style or subfield changes (e.g., ML vs. physics papers).  
-Unlike modern embedding-based methods, these models do not transfer well across domains without retuning and reinterpreting hyperparameters.
+Replace sparse TF-IDF with dense semantic embeddings
 
-**7. No autonomous reasoning or planning**  
-This Milestone 1 system is a **fixed pipeline**, not an agent:
-- It does not autonomously search for related work.
-- It cannot ask clarification questions or refine the analysis.
-- It generates summaries and topics purely from local document statistics.  
-This motivates Milestone 2, where LLMs and agentic workflows can provide semantic understanding, interactive exploration, and autonomous research assistance.
+Add visualization dashboards for topic distributions
 
----
+Improve summarization using hybrid statistical methods
 
-## 7. Next Steps Toward Milestone 2
+Integrate intelligent retrieval mechanisms
 
-- Replace sparse TF-IDF features with dense semantic embeddings (e.g., open-source sentence transformers).
-- Use an agent framework (e.g., LangGraph) to:
-  - Orchestrate web search, document retrieval, and iterative analysis.
-  - Generate structured, human-readable reports.
-- Host the final application on Hugging Face Spaces or Streamlit Community Cloud (non-local deployment).
+Deploy publicly on cloud platforms
 
+🛠 Technologies Used
+
+Python
+
+Streamlit
+
+scikit-learn
+
+spaCy
+
+NLTK
+
+📌 License
+
+This project is intended for academic and educational purposes.
