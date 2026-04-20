@@ -10,8 +10,3 @@ services:
         sync: false
       - key: OPENAI_API_KEY
         sync: false
-      - key: VITE_API_URL
-        fromService:
-          name: milestone2-frontend
-          type: web
-          property: url
